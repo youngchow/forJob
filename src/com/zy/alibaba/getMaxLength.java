@@ -29,10 +29,7 @@ public class getMaxLength {
 		//TreeSet集合是用来对象元素进行排序的,同样他也可以保证元素的唯一
 		Set<String> set = new TreeSet<String>();
 		for(int i = 0; i < qlen; i++){
-			for(int j = 1; j <= qlen; j++){
-				if(j <= i){
-					j = i + 1;
-				}
+			for(int j = i + 1; j <= qlen; j++){
 				set.add(query.substring(i, j));
 			}
 		}

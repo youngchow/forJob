@@ -1,5 +1,7 @@
 package com.zy.graph;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -99,28 +101,50 @@ public class Graph {
 		Stack<Integer> stack = new Stack<>();
 		for (int i = 0; i < vexnum; i++) {
 			if (!visited[i]) {
-				// 连通子图起始节点
-				stack.add(i);
-				do {
-					// 出栈
-					int curr = stack.pop();
-					// 如果该节点还没有被遍历，则遍历该节点并将子节点入栈
-					if (visited[i] == false) {
-						// 遍历并打印
-						visit(i);
-						visited[curr] = true;
-						// 没遍历的子节点入栈
-						for (int j = vexnum - 1; j >= 0; j--) {
-							if (arcs[i][j] == 1 && visited[j] == false) {
-								stack.add(j);
-							}
-						}
+				visited[i] = true;
+				visit(i);
+				stack.push(i);
+			}
+			while(! stack.isEmpty()){
+				int k = stack.pop();
+				for(int j = 0; j < vexnum; j++){
+					if(arcs[k][j] == 1 && visited[j] == false){
+						visited[j] = true;
+						visit(j);
+						stack.push(j);
+						break;
 					}
-				} while (!stack.isEmpty());
+				}
 			}
 		}
 	}
 
+	// 图的广度优先遍历
+		public void BFSTraverse() {
+			// 初始化节点遍历标记
+			for (int i = 0; i < vexnum; i++) {
+				visited[i] = false;
+			}
+			Queue<Integer> queue = new LinkedList<Integer>();
+			for (int i = 0; i < vexnum; i++) {
+				if (!visited[i]) {
+					visited[i] = true;
+					visit(i);
+					queue.add(i);
+				}
+				while(! queue.isEmpty()){
+					int k = queue.poll();
+					for(int j = 0; j < vexnum; j++){
+						if(arcs[k][j] == 1 && visited[j] == false){
+							visited[j] = true;
+							visit(j);
+							queue.add(j);
+						}
+					}
+				}
+			}
+		}
+	
 	public static void main(String[] args) {
 		Graph g = new Graph(6);
 		char[] vertices = { '1', '2', '3', '4', '5', '6'};
@@ -142,5 +166,10 @@ public class Graph {
 
 		System.out.print("深度优先遍历（非递归）：");
 		g.DFSTraverse2();
+		
+		System.out.println();
+
+		System.out.print("广度优先遍历（非递归）：");
+		g.BFSTraverse();
 	}
 }

@@ -9,7 +9,7 @@ package com.zy.graph;
 （6）继续查找顶点v的另一个新的邻接顶点col，转到步骤（5）。直到顶点v的所有未被访问过的邻接点处理完。转到步骤（2）。
 
 深度优先搜索DFS（depth-first search） 算法思想:
-（1）Start 顶点 v选择一个与v相邻的未被访问的顶点w
+（1）Start 顶点 v选择一个与v相邻的未被访问的顶点w
 （2）并从w出发以深度优先搜索
 （3）若一个顶点u的所有相邻顶点都被访问过了，则退回到最近被访问过、且有未被访问的w顶点!!!
 （4）然后从w出发继续进行深度优先搜索
@@ -251,7 +251,6 @@ public class GraphByMatrix {
          g.addEdge(1, 3);  
          g.addEdge(1, 4);  
          g.addEdge(2, 1);  
-         g.addEdge(2, 4);  
          g.addEdge(3, 5);  
          g.addEdge(2, 4);  
          g.addEdge(4, 5);  
@@ -259,8 +258,8 @@ public class GraphByMatrix {
          g.DFS();  
          System.out.println();  
          g.DFS2();  
-         System.out.println();  
-         g.DFS("2");  
+//         System.out.println();  
+//         g.DFS("2");  
    
          System.out.println();  
          g.BFS();  

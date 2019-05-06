@@ -1,4 +1,6 @@
 .settings
 .metadata/
 bin/
+.idea
+*.iml
 
